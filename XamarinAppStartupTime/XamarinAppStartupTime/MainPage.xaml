@@ -1,0 +1,40 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local="clr-namespace:XamarinAppStartupTime"
+             x:Class="XamarinAppStartupTime.MainPage">
+
+    <StackLayout Padding="10">
+        <Label Text="This app measures it's startup time" 
+               HorizontalOptions="Center"
+               Margin="10,20"
+               FontSize="Large"
+               FontAttributes="Bold"
+           VerticalOptions="CenterAndExpand" />
+
+        <Frame Padding="10">
+            
+            <StackLayout>
+
+                <Label Text="App Startup Time: " FontSize="12">
+                </Label>
+                <Label FontSize="12" FontAttributes="Bold" Text="{Binding StartupTime}"/>
+
+                <Label Text="Timings since startup: " FontSize="12" FontAttributes="Bold"/>
+                <CollectionView ItemsSource="{Binding Timings}" Margin="10,0,0,0">
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate>
+                            <StackLayout Orientation="Horizontal" HeightRequest="20">
+                                <Label Text="{Binding EventCaption}" FontSize="12" WidthRequest="200"/>
+                                <Label Text="{Binding ElapsedTime}" FontSize="12" FontAttributes="Bold"/>
+                            </StackLayout>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+            </StackLayout>
+        </Frame>
+
+
+    </StackLayout>
+
+</ContentPage>

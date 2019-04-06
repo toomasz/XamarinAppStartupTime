@@ -1,0 +1,35 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.28729.10
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "XamarinAppStartupTime.Android", "XamarinAppStartupTime\XamarinAppStartupTime.Android\XamarinAppStartupTime.Android.csproj", "{85730957-209F-442A-BDD9-18FF0785A5C9}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "XamarinAppStartupTime", "XamarinAppStartupTime\XamarinAppStartupTime\XamarinAppStartupTime.csproj", "{038645E7-DCE3-470F-877A-8D50B7AA2E37}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{85730957-209F-442A-BDD9-18FF0785A5C9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{85730957-209F-442A-BDD9-18FF0785A5C9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{85730957-209F-442A-BDD9-18FF0785A5C9}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{85730957-209F-442A-BDD9-18FF0785A5C9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{85730957-209F-442A-BDD9-18FF0785A5C9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{85730957-209F-442A-BDD9-18FF0785A5C9}.Release|Any CPU.Deploy.0 = Release|Any CPU
+		{038645E7-DCE3-470F-877A-8D50B7AA2E37}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{038645E7-DCE3-470F-877A-8D50B7AA2E37}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{038645E7-DCE3-470F-877A-8D50B7AA2E37}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{038645E7-DCE3-470F-877A-8D50B7AA2E37}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{038645E7-DCE3-470F-877A-8D50B7AA2E37}.Release|Any CPU.Build.0 = Release|Any CPU
+		{038645E7-DCE3-470F-877A-8D50B7AA2E37}.Release|Any CPU.Deploy.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {CB35D900-1686-4FFC-9006-12E1F5527C22}
+	EndGlobalSection
+EndGlobal
