@@ -8,7 +8,7 @@ Some screenshots, for some reason I'm getting higher startup time with app built
 
 | VS2019 | VS2017 |
 | --- | --- |
-| ![Screenshot_20190406-225215](https://user-images.githubusercontent.com/3065454/55675304-ec200f80-58c0-11e9-8161-22f8fb862913.jpg) | ![Screenshot_20190406-225742](https://user-images.githubusercontent.com/3065454/55675307-ef1b0000-58c0-11e9-82be-b742dabc076d.jpg) |
+| ![Screenshot_20190411-195519](https://user-images.githubusercontent.com/3065454/55980785-81425000-5c95-11e9-9763-f27bc4d0993f.jpg) | !![Screenshot_20190411-200312](https://user-images.githubusercontent.com/3065454/55980787-81dae680-5c95-11e9-9294-7b51b737c0f6.jpg) |
 
 
 
