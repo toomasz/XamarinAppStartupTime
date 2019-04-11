@@ -9,5 +9,7 @@ namespace XamarinAppStartupTime.Services
         void ReportEvent(string eventName);
         Task<Dictionary<string, TimeSpan?>> GetTimingsSinceStartup();
         DateTime? GetStartupTime();
+
+        int GetPid();
     }
 }

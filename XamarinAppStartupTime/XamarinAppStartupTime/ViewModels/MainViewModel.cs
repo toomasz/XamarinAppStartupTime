@@ -21,6 +21,7 @@ namespace XamarinAppStartupTime.ViewModels
                 .Select(t => new TimingItemViewModel(t.Key, t.Value))
                 .ToList();
             StartupTime = _diagnosticsService.GetStartupTime()?.ToLocalTime().ToString() ?? "-";
+            Pid = _diagnosticsService.GetPid();
         }
         private string _startupTime;
         public string StartupTime
@@ -28,6 +29,15 @@ namespace XamarinAppStartupTime.ViewModels
             get => _startupTime;
             set => Set(ref _startupTime, value);
         }
+
+        private int _pid;
+
+        public int Pid
+        {
+            get => _pid;
+            set => Set(ref _pid, value);
+        }
+
         private List<TimingItemViewModel> _timings;
         public List<TimingItemViewModel> Timings
         {

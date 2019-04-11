@@ -16,9 +16,14 @@
             
             <StackLayout>
 
-                <Label Text="App Startup Time: " FontSize="12">
-                </Label>
-                <Label FontSize="12" FontAttributes="Bold" Text="{Binding StartupTime}"/>
+                <StackLayout Orientation="Horizontal">
+                    <Label Text="App Startup Time: " FontSize="12" WidthRequest="100"/>
+                    <Label FontSize="12" FontAttributes="Bold" Text="{Binding StartupTime}"/>
+                </StackLayout>
+                <StackLayout Orientation="Horizontal">
+                    <Label Text="Pid: " FontSize="12" WidthRequest="100"/>
+                    <Label FontSize="12" FontAttributes="Bold" Text="{Binding Pid}"/>
+                </StackLayout>
 
                 <Label Text="Timings since startup: " FontSize="12" FontAttributes="Bold"/>
                 <CollectionView ItemsSource="{Binding Timings}" Margin="10,0,0,0">

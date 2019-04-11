@@ -53,5 +53,10 @@ namespace XamarinAppStartupTime.Droid.Services
         {
             return StartupTimeHelper.GetAppStartupTimeUtc();
         }
+
+        public int GetPid()
+        {
+            return Android.OS.Process.MyPid();
+        }
     }
 }
