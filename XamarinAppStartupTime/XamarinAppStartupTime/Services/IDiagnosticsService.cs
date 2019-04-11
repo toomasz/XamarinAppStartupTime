@@ -1,12 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace XamarinAppStartupTime.Services
 {
     public interface IDiagnosticsService
     {
         void ReportEvent(string eventName);
-        Dictionary<string, TimeSpan?> GetTimingsSinceStartup();
-        DateTime GetStartupTime();
+        Task<Dictionary<string, TimeSpan?>> GetTimingsSinceStartup();
+        DateTime? GetStartupTime();
     }
 }

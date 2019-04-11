@@ -1,33 +1,64 @@
 ﻿using System;
-using Android.Runtime;
+using System.Globalization;
+using Java.IO;
+using Java.Lang;
 
 namespace XamarinAppStartupTime.Droid.Services
 {
     internal static class StartupTimeHelper
     {
         private static DateTime? StartupTime;
-        public static DateTime GetAppStartupTime()
+        private static bool _attemptedToGetStartupTime;
+        public static DateTime? GetAppStartupTimeUtc()
         {
+            if(_attemptedToGetStartupTime)
+            {
+                return StartupTime;
+            }
             if (!StartupTime.HasValue)
             {
-                StartupTime = GetNativeStartupTime();
+                StartupTime = GetStartupTimeUtcFromLogcat();
+                _attemptedToGetStartupTime = true;
             }
-            return StartupTime.Value;
+            return StartupTime;
         }
 
-        private static DateTime GetNativeStartupTime()
+        private static DateTime? GetStartupTimeUtcFromLogcat()
         {
-            var classHandle = IntPtr.Zero;
-            var theClass = JNIEnv.FindClass("com.my.contentproviders/DiagnosticContentProvider", ref classHandle);
-            var theMethod = JNIEnv.GetStaticMethodID(theClass, "GetStartupTime", "()Ljava/util/Date;");
+            var pid = Android.OS.Process.MyPid();
 
-            var methodResult = JNIEnv.CallStaticObjectMethod(classHandle, theMethod);
-            using (var javaStartupTime = Java.Lang.Object.GetObject<Java.Util.Date>(methodResult, JniHandleOwnership.TransferLocalRef))
+            var process = new ProcessBuilder().
+                RedirectErrorStream(true).
+                Command("/system/bin/logcat", $"--pid={pid}", "-m", "1", "-v", "year,UTC").Start();
+
+            using (var bufferedReader = new BufferedReader(new InputStreamReader(process.InputStream)))
             {
-                var epoch = new DateTime(1970, 1, 1, 0, 0, 0, DateTimeKind.Utc);
-                var statupTimeClr = epoch.AddMilliseconds(javaStartupTime.Time);
-                return statupTimeClr;
+                string line = null;
+                while ((line = bufferedReader.ReadLine()) != null)
+                {
+                    if (ParseLogDateTime(line, out DateTime date))
+                    {
+                        return date;
+                    }
+                }
             }
+
+          
+            return null;
+        }
+        const string LogcatTimeFormat = "yyyy-MM-dd HH:mm:ss.fff";
+
+        private static bool ParseLogDateTime(string logLine, out DateTime dateTime)
+        {           
+            if(logLine.Length < LogcatTimeFormat.Length)
+            {
+                dateTime = new DateTime();
+                return false;
+            }
+            var timeStr = logLine.Substring(0, LogcatTimeFormat.Length);
+
+            return DateTime.TryParseExact(timeStr, LogcatTimeFormat,
+                CultureInfo.InvariantCulture, DateTimeStyles.AdjustToUniversal, out dateTime);
         }
     }
 }

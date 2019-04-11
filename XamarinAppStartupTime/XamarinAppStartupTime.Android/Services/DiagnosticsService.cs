@@ -1,12 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using XamarinAppStartupTime.Services;
 
 namespace XamarinAppStartupTime.Droid.Services
 {
     internal class DiagnosticsService : IDiagnosticsService
     {
-        private static Dictionary<string, TimeSpan?> _eventTimingsSinceStartup = new Dictionary<string, TimeSpan?>();
+        private static Dictionary<string, DateTime?> _eventTimingsSinceStartup = new Dictionary<string, DateTime?>();
 
         public static void ReportEventInternal(string eventName)
         {
@@ -15,7 +16,8 @@ namespace XamarinAppStartupTime.Droid.Services
                 // event already occured
                 return;
             }
-            _eventTimingsSinceStartup.Add(eventName, DateTime.UtcNow - StartupTimeHelper.GetAppStartupTime());
+            
+            _eventTimingsSinceStartup.Add(eventName, DateTime.UtcNow);
         }
 
         public void ReportEvent(string eventName)
@@ -29,17 +31,27 @@ namespace XamarinAppStartupTime.Droid.Services
             {
                 return null;
             }
-            return eventTime.Value - StartupTimeHelper.GetAppStartupTime();
+            return eventTime.Value - StartupTimeHelper.GetAppStartupTimeUtc();
         }
 
-        public Dictionary<string, TimeSpan?> GetTimingsSinceStartup()
+        public async Task<Dictionary<string, TimeSpan?>> GetTimingsSinceStartup()
         {
-            return _eventTimingsSinceStartup;
+            return await Task.Factory.StartNew(() =>
+            {
+                var timings = new Dictionary<string, TimeSpan?>();
+                var startupTime = StartupTimeHelper.GetAppStartupTimeUtc();
+                foreach (var eventInfo in _eventTimingsSinceStartup)
+                {
+                    timings.Add(eventInfo.Key, eventInfo.Value - startupTime);
+                }
+                return timings;
+            });
+           
         }
 
-        public DateTime GetStartupTime()
+        public DateTime? GetStartupTime()
         {
-            return StartupTimeHelper.GetAppStartupTime();
+            return StartupTimeHelper.GetAppStartupTimeUtc();
         }
     }
 }

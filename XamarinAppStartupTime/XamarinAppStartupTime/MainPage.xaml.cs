@@ -12,6 +12,12 @@ namespace XamarinAppStartupTime
         {
             InitializeComponent();
             BindingContext = new MainViewModel(DependencyService.Get<IDiagnosticsService>());
+            
+        }
+        protected override void OnAppearing()
+        {
+            (BindingContext as MainViewModel).OnAppeared();
+            base.OnAppearing();
         }
     }
 }
